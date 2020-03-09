@@ -50,12 +50,12 @@ public class Jeu extends JPanel implements ActionListener, KeyListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        if(dixseconde >= 100000){
+        if(dixseconde >= 10000){
             dixseconde=0;
             avance +=1;
         }
         tempsjeu +=10;
-        dixseconde +=tempsjeu;
+        dixseconde +=20;
         tempspasse += monde.vitesseDefilement+avance;
         tempspassedeuxiemefond +=monde.vitesseDefilement*4+avance;
         deplaceimage();
