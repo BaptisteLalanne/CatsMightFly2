@@ -37,6 +37,9 @@ public class Chat extends JLabel {
 
     public void deplacement(){
         coordy+=vitesse;
+        if(coordy <= 0){
+            coordy=0;
+        }
         this.setLocation(coordx,coordy);
     }
 
