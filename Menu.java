@@ -115,7 +115,7 @@ public class Menu extends JPanel {
         while ((texte = in2.readLine()) != null) {
             achatmonde3 = Boolean.parseBoolean(texte);
         }
-            in2.close();
+        in2.close();
     }
 
     public void updateachatmonde() throws IOException{

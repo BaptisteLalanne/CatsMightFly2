@@ -10,7 +10,7 @@ public class Monde1 extends Monde {
     public Monde1 (){
         super();
         obstacles = new Obstacle[5];
-        chat = new Chat(photochat,dim.height);
+        chat = new Chat(photochat,dim.height,400);
         for (int i=0; i<obstacles.length; i++) {
             obstacles[i]=new Obstacle(400,400,"missile",dim.width,dim.height-80, chat);
             obstacles[i].placement(i);
@@ -40,4 +40,5 @@ public class Monde1 extends Monde {
     public double accelerationChute() {
         return 0;
     }
+
 }

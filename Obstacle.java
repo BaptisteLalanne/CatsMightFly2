@@ -43,26 +43,20 @@ public class Obstacle extends JLabel{
 
     public boolean collision() {
         boolean res;
-        if (chat.getX()+chat.getWidth() < coordX || chat.getX()+chat.getWidth()>= coordX+largeur/2) { //perso pas encore atteint obstacle ou dépassé
+        if (chat.getX() + chat.getWidth() < coordX || chat.getX()+chat.getWidth()>= coordX+largeur/2) { //perso pas encore atteint obstacle ou dépassé
             res=false;
         } else {
             //perso dessus/dessous obstacle
-            res= (chat.getY() <= coordY + this.hauteur/1.5) && (chat.getY() + chat.getHeight() >= coordY);
+            res= (chat.getY() <= coordY + this.hauteur/2) && (chat.getY() + chat.getHeight() >= coordY+this.hauteur/3);
         }
         return res;
     }
 
     public void avanceobstacle(int vitesseDefilement, int deltaT,int valeur,int valeurmax){
-        if (collision()) {
-            //Bruit explosion
-            //Image explosion
-            //Fenetre de fin de jeu
-        } else {
             if (coordX + largeur - vitesseDefilement*deltaT < 0) { // si obstacle sort de l'écran
                 this.placementaufond(valeurmax);
             } else
                 coordX =coordX- vitesseDefilement * deltaT; // deltaT le délai entre chaque appel à la méthode
-        }
         this.setLocation(coordX,coordY);
     }
 

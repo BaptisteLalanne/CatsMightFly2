@@ -24,12 +24,28 @@ public abstract class Monde {
         for (int i=0; i<obstacles.length; i++) {
             obstacles[i].avanceobstacle(vitesseDefilement,deltaT,i,obstacles.length);
         }
-    } // Acceleration du défilement ?
+    }
+    public boolean collisionobstacles (){
+        boolean perdu = false;
+        for (int i=0; i<obstacles.length; i++) {
+            if(obstacles[i].collision()){
+                perdu = true;
+            }
+        }
+        return perdu;
+    }// Acceleration du défilement ?
 
 
     /// Les méthodes abstraites
 
     public abstract double vitesseChute();
     public abstract double accelerationChute();
+
+    public void eloignerlesobstacles(){
+        for (int i=0; i<obstacles.length; i++) {
+            obstacles[i]=new Obstacle(400,400,"missile",dim.width,dim.height-80, chat);
+            obstacles[i].placement(i);
+        }
+    }
 
 }

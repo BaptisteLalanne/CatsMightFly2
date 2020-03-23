@@ -9,6 +9,7 @@ public class CatsMightFly extends JFrame implements ActionListener {
     private Magasin magasin = new Magasin();
     private Audio audio = new Audio();
     private Regles regles = new Regles();
+    private Jeu jeu = new Jeu();
 
     public CatsMightFly() {
         super("Cats might Fly  - Version 1.0");
@@ -49,11 +50,18 @@ public class CatsMightFly extends JFrame implements ActionListener {
             }if(monde == 3 ) {
                 choixmonde = new Monde3();
             }
-            Jeu jeu = new Jeu(choixmonde);
+            jeu = new Jeu(choixmonde,audio);
+
+            jeu.addKeyListener(jeu);
+            jeu.menu.addActionListener(this);
+            jeu.setFocusable(true);
             this.setContentPane(jeu);
             this.revalidate();
-            jeu.setFocusable(true);
         }
+        if (e.getSource() == jeu.menu) {
+            afficherMenu();
+        }
+
 
         if (e.getSource() == menu.regles) {
             this.afficherRegles();
