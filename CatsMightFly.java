@@ -45,6 +45,9 @@ public class CatsMightFly extends JFrame implements ActionListener {
         if (e.getSource() == menu.jouer) {
             audio.arreter();
             Monde choixmonde = new Monde1();
+            if (monde == 1){
+                audio.sonmonde1();
+            }
             if (monde == 2){
                 choixmonde = new Monde2();
             }if(monde == 3 ) {
@@ -60,6 +63,7 @@ public class CatsMightFly extends JFrame implements ActionListener {
         }
         if (e.getSource() == jeu.menu) {
             afficherMenu();
+            audio.jouerEnBoucle();
         }
 
 

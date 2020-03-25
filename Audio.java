@@ -7,15 +7,18 @@ public class Audio extends Thread
     private AudioClip sound;
     private AudioClip bouton;
     private AudioClip explosion;
+    private AudioClip monde1;
 
     public Audio()
     {
         URL url = this.getClass().getClassLoader().getResource("accueil.wav");
         URL url2 = this.getClass().getClassLoader().getResource("bouton.wav");
-        URL url3 = this.getClass().getClassLoader().getResource("fin.wav");
+        URL url3 = this.getClass().getClassLoader().getResource("explo.wav");
+        URL url4 = this.getClass().getClassLoader().getResource("Monde1.wav");
         sound = Applet.newAudioClip(url);
         bouton = Applet.newAudioClip(url2);
         explosion = Applet.newAudioClip(url3);
+        monde1 = Applet.newAudioClip(url4);
     }
 
     public void jouer()
@@ -38,4 +41,12 @@ public class Audio extends Thread
     public void sonexplosion(){
         explosion.play();
     }
+    public void sonmonde1(){
+        monde1.loop();
+    }
+    public void arretermonde1()
+    {
+        monde1.stop();
+    }
+
 }

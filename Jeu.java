@@ -98,10 +98,12 @@ public class Jeu extends JPanel implements ActionListener, KeyListener {
             monde.chat.chute();
         }else{
             distance.setBounds(dim.width/2-200,50,2000,100);
+            audio.arretermonde1();
             policetexte(false);
             menu.setVisible(true);
             menu.setEnabled(true);
         }
+        repaint();
     }
     public void deplaceimage(){
         fond.setBounds(-tempspasse,0,monde.tailleimage()[2],monde.tailleimage()[3]);
