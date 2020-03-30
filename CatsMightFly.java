@@ -60,6 +60,7 @@ public class CatsMightFly extends JFrame implements ActionListener {
             jeu.setFocusable(true);
             this.setContentPane(jeu);
             this.revalidate();
+            jeu.prendrecontrolactionlistener();
         }
         if (e.getSource() == jeu.menu) {
             afficherMenu();

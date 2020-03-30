@@ -72,14 +72,13 @@ public class Jeu extends JPanel implements ActionListener, KeyListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        if(tempsjeu==0){
-            this.requestFocus();
-        }
         if(monde.collisionobstacles()){
             audio.sonexplosion();
             monde.eloignerlesobstacles();
             perdu = true;
-        }else if (!perdu) {
+            afficherfin();
+            temps.stop();
+        }else{
             if (cinqseconde >= 5000) {
                 cinqseconde = 0;
                 avance += 1;
@@ -88,31 +87,25 @@ public class Jeu extends JPanel implements ActionListener, KeyListener {
             }
             distanceparcouru = cinqseconde*avance/1000;
             cinqseconde += 10;
-            tempspasse += monde.vitesseDefilement + avance;
-            tempspassedeuxiemefond += monde.vitesseDefilement * 4 + avance;
+            tempspasse += monde.vitesseDefilement*(1+avance);
+            tempspassedeuxiemefond += monde.vitesseDefilement * (4+avance);
             deplaceimage();
             distance.setText("Distance parcourue:" + (distanceparcouruparvitesse+distanceparcouru) + "m");
             if (avance > 1) {
-                deplaceobstacle(6 + avance);
+                deplaceobstacle(avance);
             }
             monde.chat.chute();
-        }else{
-            distance.setBounds(dim.width/2-200,50,2000,100);
-            audio.arretermonde1();
-            policetexte(false);
-            menu.setVisible(true);
-            menu.setEnabled(true);
         }
         repaint();
     }
     public void deplaceimage(){
-        fond.setBounds(-tempspasse,0,monde.tailleimage()[2],monde.tailleimage()[3]);
-        fond2.setBounds(monde.tailleimage()[2]-tempspasse,0,monde.tailleimage()[2],dim.height);
+        fond.setLocation(-tempspasse,0);
+        fond2.setLocation(monde.tailleimage()[2]-tempspasse,0);
         if(monde.tailleimage()[2]-tempspasse<=0){
             tempspasse=0;
         }
-        fond3.setBounds(-tempspassedeuxiemefond,0,monde.tailleimage()[2],monde.tailleimage()[3]);
-        fond4.setBounds(monde.tailleimage()[2]-tempspassedeuxiemefond,0,monde.tailleimage()[2],dim.height);
+        fond3.setLocation(-tempspassedeuxiemefond,0);
+        fond4.setLocation(monde.tailleimage()[2]-tempspassedeuxiemefond,0);
         if(monde.tailleimage()[2]-tempspassedeuxiemefond<=0){
             tempspassedeuxiemefond=0;
         }
@@ -152,5 +145,15 @@ public class Jeu extends JPanel implements ActionListener, KeyListener {
             new Font("Arial",Font.BOLD,12);
         }
         distance.setFont(font);
+    }
+    public void prendrecontrolactionlistener(){
+        this.requestFocus();
+    }
+    public void afficherfin(){
+        distance.setBounds(dim.width/2-200,50,2000,100);
+        audio.arretermonde1();
+        policetexte(false);
+        menu.setVisible(true);
+        menu.setEnabled(true);
     }
 }

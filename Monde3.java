@@ -11,9 +11,9 @@ public class Monde3 extends Monde {
     public Monde3 (){
         super();
         obstacles = new Obstacle[8];
-        chat = new Chat(photochat,dim.height,350);
+        chat = new Chat(photochat,dim.height,350,gravite);
         for (int i=0; i<obstacles.length; i++) {
-            obstacles[i]=new Obstacle(400,400,"tête chercheuse",dim.width,dim.height-80, chat);
+            obstacles[i]=new Missile(400,400,"tête chercheuse",dim.width,dim.height-80, chat);
             obstacles[i].placement(i);
         }
 

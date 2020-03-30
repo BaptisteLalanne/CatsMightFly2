@@ -43,7 +43,6 @@ public abstract class Monde {
 
     public void eloignerlesobstacles(){
         for (int i=0; i<obstacles.length; i++) {
-            obstacles[i]=new Obstacle(400,400,"missile",dim.width,dim.height-80, chat);
             obstacles[i].placement(i);
         }
     }
