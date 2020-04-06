@@ -6,12 +6,19 @@ public class Chat extends JLabel {
     private int coordy;
     public double vitesse;
     private int hauteur;
-    public Chat (Icon photochat,int hauteur){
+    private int ybasduniveau;
+    private double gravite;
+
+    public Chat (Icon photochat,int hauteur, int ybasduniveau, double gravite){
+        this.ybasduniveau = ybasduniveau;
+        this.gravite = gravite;
         this.setIcon(photochat);
         this.hauteur=hauteur;
         this.coordy=hauteur/2;
         this.setBounds(coordx,coordy,270,160);
     }
+    
+    public double get_vitesse() { return vitesse; }
 
     public void deplace(int choix){
         if(coordy <= 0){
@@ -23,22 +30,26 @@ public class Chat extends JLabel {
                 vitesse -= 1;
             }
         }
+        if (vitesse >4){
+            vitesse = 4;
+        }
         deplacement();
     }
 
     public void chute(){
-        if(coordy+400 >= hauteur){
+        if(coordy+ybasduniveau >= hauteur){
             vitesse = 0;
         }else{
-            vitesse += 0.1;
+            vitesse += gravite*0.2/10;
         }
         deplacement();
     }
 
     public void deplacement(){
         coordy+=vitesse;
-        if(coordy <= 0){
+        if(coordy <= 0 && vitesse <= 0 ){
             coordy=0;
+            vitesse =0;
         }
         this.setLocation(coordx,coordy);
     }
