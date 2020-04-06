@@ -98,7 +98,7 @@ public class Jeu extends JPanel implements ActionListener, KeyListener {
             tempspasse += monde.vitesseDefilement*(1+avance);
             tempspassedeuxiemefond += monde.vitesseDefilement * (4+avance);
             deplaceimage();
-            distance.setText("Distance parcourue:" + (distanceparcouruparvitesse+distanceparcouru) + "m");
+            distance.setText("Distance parcourue:" + (distanceparcouruparvitesse+distanceparcouru) + "m, temp : "+monde.temp); //TEST TEMP
             if (avance > 1) {
                 deplaceobstacle(avance);
             }

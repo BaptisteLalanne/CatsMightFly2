@@ -11,6 +11,8 @@ public abstract class Monde {
     protected int vitesseDefilement;
     protected Icon photo;
     protected int piece;
+    
+    protected int temp;
 
     public Monde() {
         gravite=9.81;
@@ -55,7 +57,7 @@ public abstract class Monde {
     public abstract double vitesseChute();
     public abstract double accelerationChute();
 
-    public void eloignerlesobstacles(){
+    public void eloignerlesobstacles(){		//Eviter de détecter la collision toutes les millisecondes
         for (int i=0; i<obstacles.length; i++) {
             obstacles[i].placement(i);
         }
