@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.*;
 
 public abstract class Monde {
 
@@ -9,11 +10,17 @@ public abstract class Monde {
     protected Chat chat;
     protected int vitesseDefilement;
     protected Icon photo;
+    protected int piece;
 
-    public Monde(){
+    public Monde() {
         gravite=9.81;
         vitesseDefilement=1;
         dim = Toolkit.getDefaultToolkit().getScreenSize();
+        try {
+            calculpiece();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     public abstract Icon Imageduniveau();
     public abstract Icon Imageduniveaudiffilant();
@@ -27,10 +34,17 @@ public abstract class Monde {
     }
     public boolean collisionobstacles (){
         boolean perdu = false;
-        for (int i=0; i<obstacles.length; i++) {
-            if(obstacles[i].collision()){
-                perdu = true;
-            }
+        for (Obstacle obstacle : obstacles) {
+                if (obstacle.collision()) {
+                    if (obstacle instanceof Souris) {
+                        piece +=1;
+                        int hasard = (int)(2+ Math.random()*3);
+                        obstacle.placementaufond(hasard);
+                    }else{
+                        perdu = true;
+                    }
+                }
+
         }
         return perdu;
     }// Acceleration du défilement ?
@@ -46,5 +60,19 @@ public abstract class Monde {
             obstacles[i].placement(i);
         }
     }
+    public void calculpiece() throws IOException {
+        BufferedReader in = new BufferedReader(new FileReader("piece.txt"));
+        String texte;
+        while ((texte = in.readLine()) != null)
+        {
+            piece = Integer.parseInt(texte);
+        }
+        in.close();
+    }
 
+    public void updatepiece() throws IOException{ // Pour écrire dans le .txt le nouveau nombre de piece
+        BufferedWriter out = new BufferedWriter (new FileWriter("piece.txt"));
+        out.write(String.valueOf(piece));
+        out.close();
+    }
 }

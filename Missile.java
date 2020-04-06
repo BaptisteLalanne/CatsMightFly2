@@ -22,6 +22,7 @@ public class Missile extends Obstacle {
 
     public void avanceobstacle(int vitesseDefilement, int deltaT,int valeur,int valeurmax){
         if (coordX + largeur - vitesseDefilement*(6+deltaT) < 0) { // si obstacle sort de l'écran
+            valeurmax = valeurmax - 1 ; // si l'on veux qu'il n'y est pas d'espace, on enlève la place prise par la souris
             this.placementaufond(valeurmax);
         } else
             coordX =coordX- vitesseDefilement * (6+deltaT); // deltaT le délai entre chaque appel à la méthode
