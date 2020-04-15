@@ -60,7 +60,7 @@ public class Monde2 extends Monde {
     
     public int temperature() {
 		if (chat.get_vitesse() == 0){
-			temp+=1;
+			temp+=2;
 		} else if (temp>0) {
 			temp-=2; // Energie thermique = m*Cp*dT, flux thermique = E/temps ?
 			} else {
