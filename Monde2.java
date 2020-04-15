@@ -39,11 +39,22 @@ public class Monde2 extends Monde {
     }
     
     public boolean collisionobstacles (){
-        super();
+        boolean perdu = false;
         temp = temperature();
         if (temp>1000){
 			perdu = true;
 		}
+        for (Obstacle obstacle : obstacles) {
+                if (obstacle.collision()) {
+                    if (obstacle instanceof Souris) {
+                        piece +=1;
+                        int hasard = (int)(2+ Math.random()*3);
+                        obstacle.placementaufond(hasard);
+                    }else{
+                        perdu = true;
+                    }
+                }
+        }
         return perdu;
     }
     
@@ -54,6 +65,7 @@ public class Monde2 extends Monde {
 			temp-=2; // Energie thermique = m*Cp*dT, flux thermique = E/temps ?
 			} else {
 				temp=0;
+				System.out.println("coucou");
 			}
 		return temp;
 	}
