@@ -65,8 +65,8 @@ public class Monde2 extends Monde {
 			temp-=2; // Energie thermique = m*Cp*dT, flux thermique = E/temps ?
 			} else {
 				temp=0;
-				System.out.println("coucou");
 			}
+		System.out.println(temp);	
 		return temp;
 	}
 
