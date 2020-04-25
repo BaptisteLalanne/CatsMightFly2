@@ -2,12 +2,13 @@ import javax.swing.*;
 
 
 public class Chat extends JLabel {
-    private int coordx=100;
+    private final int coordx=100;
     private int coordy;
     public double vitesse;
-    private int hauteur;
-    private int ybasduniveau;
-    private double gravite;
+    private final int hauteur;
+    private final int ybasduniveau;
+    private final double gravite;
+    public int piece;
 
     public Chat (Icon photochat,int hauteur, int ybasduniveau, double gravite){
         this.ybasduniveau = ybasduniveau;
@@ -17,26 +18,25 @@ public class Chat extends JLabel {
         this.coordy=hauteur/2;
         this.setBounds(coordx,coordy,270,160);
     }
-    
-    public double get_vitesse() { return vitesse; }
 
     public void deplace(int choix){
         if(coordy <= 0){
             vitesse = 0;
         }else{
-            if(choix == 1){
+            if(choix == 1){ // Choix 1 = appuie court sur la barre d'espace
                 vitesse -= 2;
-            }else{
+            }else{ // Choix 2 = appuie prolongé
                 vitesse -= 1;
             }
         }
-        if (vitesse >4){
+        if (vitesse >4){ // Vitesse max
             vitesse = 4;
         }
-        deplacement();
+        deplacement(); // Appel de la méthode pour afficher le déplacement
     }
+    public double get_vitesse() { return vitesse; }
 
-    public void chute(){
+    public void chute(){   // Appelé tous les deltaT du Timer pour faire tomber le joueur en fonction de la gravité
         if(coordy+ybasduniveau >= hauteur){
             vitesse = 0;
         }else{

@@ -3,8 +3,8 @@ import java.awt.*;
 
 
 public class Regles extends JPanel {
-    public Dimension dim;
-    public Bouton retour;
+    public final Dimension dim;
+    public final Bouton retour;
 
     public Regles(){
         this.setLayout(null);

@@ -4,15 +4,15 @@ import java.io.*;
 
 public abstract class Monde {
 
-    protected  Dimension dim;
+    protected final Dimension dim;
     protected Obstacle[] obstacles;
     protected double gravite;
     protected Chat chat;
     protected int vitesseDefilement;
-    protected Icon photo;
     protected int piece;
-    
-    protected int temp;
+    protected Icon photochat;
+    protected Icon photodiffilant;
+    protected Icon photo;
 
     public Monde() {
         gravite=9.81;
@@ -38,26 +38,21 @@ public abstract class Monde {
         boolean perdu = false;
         for (Obstacle obstacle : obstacles) {
                 if (obstacle.collision()) {
-                    if (obstacle instanceof Souris) {
+                    if (obstacle instanceof Souris) { // Si le joueur a touché une souris, il gagne une pièce et on place une nouvelle souris
                         piece +=1;
                         int hasard = (int)(2+ Math.random()*3);
                         obstacle.placementaufond(hasard);
-                    }else{
+                    }else{ // Le joueur a touché autre chose qu'une souris
                         perdu = true;
                     }
                 }
 
         }
         return perdu;
-    }// Acceleration du défilement ?
+    }
 
 
-    /// Les méthodes abstraites
-
-    public abstract double vitesseChute();
-    public abstract double accelerationChute();
-
-    public void eloignerlesobstacles(){		//Eviter de détecter la collision toutes les millisecondes
+    public void eloignerlesobstacles(){
         for (int i=0; i<obstacles.length; i++) {
             obstacles[i].placement(i);
         }

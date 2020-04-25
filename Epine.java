@@ -22,6 +22,7 @@ public class Epine extends Obstacle {
 
     public void avanceobstacle(int vitesseDefilement, int deltaT,int valeur,int valeurmax){
         if (coordX + largeur - vitesseDefilement*(4+deltaT) < 0) { // si obstacle sort de l'écran
+            valeurmax -= 1; // Il faut retirer la place prise par les pièces (souris)
             this.placementaufond(valeurmax);
         } else
             coordX =coordX- vitesseDefilement * (4+deltaT); // deltaT le délai entre chaque appel à la méthode

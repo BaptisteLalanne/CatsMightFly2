@@ -5,14 +5,14 @@ import java.io.IOException;
 
 public class CatsMightFly extends JFrame implements ActionListener {
     private int monde; // Variable qui nous permettra de savoir quel monde à choisit le joueur au moment de cliquer sur Jouer
-    private Menu menu = new Menu();
-    private Magasin magasin = new Magasin();
-    private Audio audio = new Audio();
-    private Regles regles = new Regles();
+    private final Menu menu = new Menu();
+    private final Magasin magasin = new Magasin();
+    private final Audio audio = new Audio();
+    private final Regles regles = new Regles();
     private Jeu jeu = new Jeu();
 
     public CatsMightFly() {
-        super("Cats might Fly  - Version 1.0");
+        super("Cats might Fly  - Version 2.2");
         audio.jouerEnBoucle(); // On lance la musique d'accueil en boucle
         magasin.retour.addActionListener(this); // On met sur écoute tous les boutons
         menu.gauche.addActionListener(this);
@@ -63,6 +63,7 @@ public class CatsMightFly extends JFrame implements ActionListener {
             jeu.prendrecontrolactionlistener();
         }
         if (e.getSource() == jeu.menu) {
+            audio.arreterronron();
             afficherMenu();
             audio.jouerEnBoucle();
         }
@@ -141,7 +142,7 @@ public class CatsMightFly extends JFrame implements ActionListener {
         this.revalidate();
     }
 
-    public void afficherRegles(){  // // On change le JPanel principal par celui du Menu
+    public void afficherRegles(){  // // On change le JPanel principal par celui des Regles
         this.setContentPane(regles);
         this.revalidate();
     }

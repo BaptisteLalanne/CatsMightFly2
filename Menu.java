@@ -4,17 +4,17 @@ import java.io.*;
 
 public class Menu extends JPanel {
 
-    public Bouton jouer; // Tout les boutons sont en public car c'est le main qui a l'Action Listener dessus
-    public Bouton shop;
-    public Bouton droite;
-    public Bouton gauche;
-    public Bouton regles;
-    public JLabel image;
-    public JLabel verouiller;
-    public Dimension dim;
+    public final Bouton jouer; // Tout les boutons sont en public car c'est le main qui a l'Action Listener dessus
+    public final Bouton shop;
+    public final Bouton droite;
+    public final Bouton gauche;
+    public final Bouton regles;
+    public final JLabel image;
+    public final JLabel verouiller;
+    public final Dimension dim;
     public boolean achatmonde2;
     public boolean achatmonde3;
-    private JLabel choixniveau;
+    private final JLabel choixniveau;
     private Icon gif;
     private Icon photo;
     private Icon choixmonde;

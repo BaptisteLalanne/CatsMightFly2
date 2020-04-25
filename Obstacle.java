@@ -3,13 +3,13 @@ import javax.swing.*;
 
 public abstract class Obstacle extends JLabel{
 
-    protected int largeur;
-    protected int hauteur;
+    protected final int largeur;
+    protected final int hauteur;
     protected int coordX;
     protected int coordY;
-    public int hauteur_fenetre;
-    public int largeur_fenetre;
-    public Chat chat;
+    public final int hauteur_fenetre;
+    public final int largeur_fenetre;
+    public final Chat chat;
 
     public Obstacle (int larg, int haut, String type, int largeur_fenetre, int hauteur_fenetre, Chat chat) {
         largeur = larg;

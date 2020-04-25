@@ -2,13 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Monde1 extends Monde {
-    Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-    public Icon photo = new ImageIcon(new ImageIcon("Fondmonde1v2.png").getImage().getScaledInstance(2158,dim.height, Image.SCALE_DEFAULT));
-    public Icon photodiffilant= new ImageIcon(new ImageIcon("Fondmonde1deffilantv2.png").getImage().getScaledInstance(2158,dim.height,Image.SCALE_DEFAULT));
-    public Icon photochat = new ImageIcon("original.gif");
 
     public Monde1 (){
         super();
+        photo = new ImageIcon(new ImageIcon("Fondmonde1v2.png").getImage().getScaledInstance(2158,dim.height, Image.SCALE_DEFAULT));
+        photodiffilant= new ImageIcon(new ImageIcon("Fondmonde1deffilantv2.png").getImage().getScaledInstance(2158,dim.height,Image.SCALE_DEFAULT));
+        photochat = new ImageIcon("original.gif");
         obstacles = new Obstacle[4];
         chat = new Chat(photochat,dim.height,400,gravite);
         for (int i=0; i<obstacles.length-1; i++) {
@@ -35,13 +34,4 @@ public class Monde1 extends Monde {
         return tableau;
 
     }
-
-    public double vitesseChute() {
-        return 0;
-    }
-
-    public double accelerationChute() {
-        return 0;
-    }
-
 }

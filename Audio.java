@@ -4,10 +4,10 @@ import java.net.URL;
 
 public class Audio extends Thread
 {
-    private AudioClip sound;
-    private AudioClip bouton;
-    private AudioClip explosion;
-    private AudioClip monde1;
+    private final AudioClip sound;
+    private final AudioClip bouton;
+    private final AudioClip explosion;
+    private final AudioClip monde1;
 
     public Audio()
     {
@@ -48,5 +48,6 @@ public class Audio extends Thread
     {
         monde1.stop();
     }
+    public void arreterronron(){ explosion.stop();}
 
 }

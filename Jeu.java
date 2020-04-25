@@ -1,16 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.*;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 
 
 public class Jeu extends JPanel implements ActionListener, KeyListener {
-    public Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+    public final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
     public Timer temps;
     public JLabel fond;
     public JLabel fond2;
@@ -21,7 +17,6 @@ public class Jeu extends JPanel implements ActionListener, KeyListener {
     public int tempspasse;
     public int tempspassedeuxiemefond;
     private Monde monde;
-    public int tempsjeu;
     public int cinqseconde;
     public int avance = 1;
     public int distanceparcouru;
@@ -33,7 +28,6 @@ public class Jeu extends JPanel implements ActionListener, KeyListener {
         this.audio=audio;
         this.setLayout(null);
         this.monde = monde;
-        this.add(monde.chat);
         temps = new Timer(10,this);
         temps.start();
         distance = new JLabel();
@@ -45,7 +39,6 @@ public class Jeu extends JPanel implements ActionListener, KeyListener {
         fond4 = new JLabel();
         menu = new Bouton (new ImageIcon("retour.png"));
         menu.setBounds(0, 0, 300, 200);
-
         Icon photo = monde.Imageduniveau();
         Icon photo2= monde.Imageduniveaudiffilant();
         fond.setIcon(photo);
@@ -61,8 +54,13 @@ public class Jeu extends JPanel implements ActionListener, KeyListener {
         for (int i=0; i<monde.obstacles.length; i++) {
             this.add(monde.obstacles[i]);
         }
+        if(monde instanceof Monde2){ // Si le monde est le monde2 alors ajout spécial d'élèments
+            this.add(((Monde2) monde).decorationthermo);
+            this.add(((Monde2) monde).thermo);
+        }
         this.add(menu);
-        menu.setVisible(false);
+        this.add(monde.chat);
+        menu.setVisible(false); // On désactive le bouton retour, il sera visible et utilisable quand le joueur perd
         menu.setEnabled(false);
         this.add(distance);
         this.add(fond3);
@@ -75,19 +73,19 @@ public class Jeu extends JPanel implements ActionListener, KeyListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        if(monde.collisionobstacles()){
+        if(monde.collisionobstacles()){ // On regarde si le joueur a touché un obstacle (souris ou obstacle mortel)
             audio.sonexplosion();
-            monde.eloignerlesobstacles();
+            monde.eloignerlesobstacles(); // Visuellement pour ne plus voir l'objet touché (explosé)
             perdu = true;
-            afficherfin();
+            afficherfin(); // Appel de la méthode pour afficher le score
             temps.stop();
             try {
-                monde.updatepiece();
+                monde.updatepiece(); // Ajout dans le piece.txt les pièces récoltés par le joueur
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
         }else{
-            if (cinqseconde >= 5000) {
+            if (cinqseconde >= 5000) {  // Toutes les 5 secondes on accélère le niveau
                 cinqseconde = 0;
                 avance += 1;
                 distanceparcouruparvitesse += distanceparcouru;
@@ -98,15 +96,15 @@ public class Jeu extends JPanel implements ActionListener, KeyListener {
             tempspasse += monde.vitesseDefilement*(1+avance);
             tempspassedeuxiemefond += monde.vitesseDefilement * (4+avance);
             deplaceimage();
-            distance.setText("Distance parcourue:" + (distanceparcouruparvitesse+distanceparcouru) + "m, temp : "+monde.temp); //TEST TEMP
-            if (avance > 1) {
+            distance.setText("Distance parcourue:" + (distanceparcouruparvitesse+distanceparcouru) + "m");
+            if (avance > 1) { // Les 5 premières secondes (avance = 0) le joueur n'a pas d'obstacle pour se préparer à sa run
                 deplaceobstacle(avance);
             }
             monde.chat.chute();
         }
         repaint();
     }
-    public void deplaceimage(){
+    public void deplaceimage(){ // Le fond est en deux images qui se bouclent entre elle pour faire un fond infini (2 fonds avec 2 vitesse différentes)
         fond.setLocation(-tempspasse,0);
         fond2.setLocation(monde.tailleimage()[2]-tempspasse,0);
         if(monde.tailleimage()[2]-tempspasse<=0){
@@ -119,14 +117,12 @@ public class Jeu extends JPanel implements ActionListener, KeyListener {
         }
     }
     public void deplaceobstacle(int vitesse){
-
         monde.obstacleAvance(vitesse);
     }
 
     public void keyTyped(KeyEvent k) {
     }
     public void keyPressed(KeyEvent k) {
-
         if(k.getKeyCode() == KeyEvent.VK_SPACE){
             if(!perdu){
                 monde.chat.deplace(2);
@@ -157,10 +153,11 @@ public class Jeu extends JPanel implements ActionListener, KeyListener {
     public void prendrecontrolactionlistener(){
         this.requestFocus();
     }
-    public void afficherfin(){
+
+    public void afficherfin(){ // On coupe la musique et on dévoile/active le bouton retour (instancié dans le constructeur au début)
         distance.setBounds(dim.width/2-200,50,2000,100);
         audio.arretermonde1();
-        policetexte(false);
+        policetexte(false); // false = grande police
         menu.setVisible(true);
         menu.setEnabled(true);
     }

@@ -4,13 +4,13 @@ import java.io.*;
 
 public class Magasin extends JPanel {
 
-    public Dimension dim;
-    public Bouton retour;
+    public final Dimension dim;
+    public final Bouton retour;
     public int piece;
     public String texte;
-    public JLabel nombrepiece;
-    public JButton achat2;
-    public JButton achat3;
+    public final JLabel nombrepiece;
+    public final JButton achat2;
+    public final JButton achat3;
 
     public Magasin(){
         this.setLayout(null);
