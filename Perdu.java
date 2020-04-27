@@ -1,20 +1,23 @@
+/*
+ * Fenêtre de fin de partie
+ * */
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
-
 
 public class Perdu extends JPanel {
     public Dimension dim;
     public Bouton menu;
     private JLabel distance;
 
-    public Perdu(int distanceparcouru){
+    public Perdu(int distanceparcourue){
         this.setLayout(null);
         dim = Toolkit.getDefaultToolkit().getScreenSize();
         menu = new Bouton (new ImageIcon("retour.png"));
         menu.setBounds(0, 0, 300, 200);
         JLabel fin = new JLabel();
-        distance = new JLabel("Distance parcourue"+String.valueOf(distanceparcouru));
+        distance = new JLabel("Distance parcourue"+String.valueOf(distanceparcourue));
         policetexte();
         Icon photo = new ImageIcon(new ImageIcon("rules.png").getImage().getScaledInstance(dim.width,dim.height, Image.SCALE_DEFAULT));
         fin.setIcon(photo);
@@ -22,8 +25,9 @@ public class Perdu extends JPanel {
         this.add(menu);
         this.add(fin);
     }
-
-    public void policetexte(){ // Pour prendre notre police
+    
+/// POUR PRENDRE NOTRE POLICE
+    public void policetexte(){
         Font font = null;
         try{
             font = Font.createFont(Font.TRUETYPE_FONT, new File("police.ttf"));
@@ -34,4 +38,3 @@ public class Perdu extends JPanel {
         distance.setFont(font);
     }
 }
-

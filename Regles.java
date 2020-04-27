@@ -1,3 +1,7 @@
+/*
+ * JPanel des règles du jeu
+ * */
+
 import javax.swing.*;
 import java.awt.*;
 

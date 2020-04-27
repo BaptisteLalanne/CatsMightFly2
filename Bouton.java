@@ -1,3 +1,7 @@
+/*
+ * Classe pour simplifier la création des boutons
+ * */
+
 import javax.swing.*;
 
 public class Bouton extends JButton {

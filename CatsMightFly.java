@@ -1,10 +1,15 @@
+/*
+ * Classe principale à exécuter
+ * Actionlistener des boutons du Menu, Magasin et Règles
+ * */
+
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 import java.io.IOException;
 
 public class CatsMightFly extends JFrame implements ActionListener {
-    private int monde; // Variable qui nous permettra de savoir quel monde à choisit le joueur au moment de cliquer sur Jouer
+    private int monde; // Variable qui nous permettra de savoir quel monde à choisi le joueur au moment de cliquer sur Jouer
     private final Menu menu = new Menu();
     private final Magasin magasin = new Magasin();
     private final Audio audio = new Audio();
@@ -23,7 +28,7 @@ public class CatsMightFly extends JFrame implements ActionListener {
         magasin.achat2.addActionListener(this);
         magasin.achat3.addActionListener(this);
         regles.retour.addActionListener(this);
-        monde = 1;
+        monde = 1; // Ouvre le menu sur le monde 1 par défaut
         this.setLocationRelativeTo(null);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize(); // Pour prendre les dimensions de l'écran
         this.add(menu);
@@ -39,22 +44,25 @@ public class CatsMightFly extends JFrame implements ActionListener {
     }
 
 
-
     public void actionPerformed(ActionEvent e){
-        audio.sonbouton(); // A chaque clique sur un JButton on déclanche le son
+        audio.sonbouton(); // A chaque clic sur un JButton on déclenche le son
+        
+/// LANCER UNE PARTIE
         if (e.getSource() == menu.jouer) {
             audio.arreter();
-            Monde choixmonde = new Monde1();
+            
+            Monde choixmonde = new Monde1(); // Créé le monde et le son correspondant au choix du joueur
             if (monde == 1){
                 audio.sonmonde1();
             }
             if (monde == 2){
                 choixmonde = new Monde2();
+                audio.sonmonde2();
             }if(monde == 3 ) {
                 choixmonde = new Monde3();
+                audio.sonmonde3();
             }
-            jeu = new Jeu(choixmonde,audio);
-
+            jeu = new Jeu(choixmonde,audio); // Créé la fenêtre de jeu
             jeu.addKeyListener(jeu);
             jeu.menu.addActionListener(this);
             jeu.setFocusable(true);
@@ -62,24 +70,32 @@ public class CatsMightFly extends JFrame implements ActionListener {
             this.revalidate();
             jeu.prendrecontrolactionlistener();
         }
+
+/// OUVRIR REGLES DU JEU
+        if (e.getSource() == menu.regles) {
+            this.afficherRegles();
+        }
+		
+/// OUVRIR MAGASIN
+        if(e.getSource()== menu.shop){ 
+            try {
+                magasin.calculpiece();// On récupère la valeur de piece du .txt pour savoir ce que le joueur peut acheter
+                this.afficherMagasin();
+            } catch (Exception e2){
+            }
+        }
+        
+/// RETOUR AU MENU
         if (e.getSource() == jeu.menu) {
             audio.arreterronron();
             afficherMenu();
             audio.jouerEnBoucle();
         }
-
-
-        if (e.getSource() == menu.regles) {
-            this.afficherRegles();
+        if(e.getSource()== magasin.retour || e.getSource()== regles.retour){
+            afficherMenu();
         }
-
-        if(e.getSource()== menu.shop){ // On récupère la valeur de piece du .txt pour savoir ce que le joueur peux acheter et on affiche le magasin.
-            try {
-                magasin.calculpiece();
-                this.afficherMagasin();
-            } catch (Exception e2){
-            }
-        }
+        
+/// SELECTION DU MONDE
         if((e.getSource() == menu.droite) && (monde == 2)) {
             monde = 3;
             menu.changemonde3();
@@ -96,10 +112,9 @@ public class CatsMightFly extends JFrame implements ActionListener {
             monde = 2;
             menu.changemonde2();
         }
-        if(e.getSource()== magasin.retour || e.getSource()== regles.retour){ // On appel la méthode pour affcher le menu si le joueur sort du magasin
-            afficherMenu();
-        }
-        if(e.getSource()==magasin.achat2 && magasin.piece>=100 ){ //Si le joueur achete le monde3, la variable achatmonde3 devient true et on modifie les .txt pour garder cette variable true même si il quitte le jeu.
+        
+/// ACHAT DES MONDES
+        if(e.getSource()==magasin.achat2 && magasin.piece>=100 ){ //Si le joueur achète le monde 2, la variable achatmonde2 devient true et on modifie les .txt pour garder cette variable true même si il quitte le jeu.
             menu.achatmonde2=true;
             magasin.piece -= 100;
             try {
@@ -112,7 +127,7 @@ public class CatsMightFly extends JFrame implements ActionListener {
             menu.changemonde1();
             monde=1;
         }
-        if(e.getSource()==magasin.achat3 && magasin.piece>=200){ //Si le joueur achete le monde3, la variable achatmonde3 devient true et on modifie les .txt pour garder cette variable true même si il quitte le jeu.
+        if(e.getSource()==magasin.achat3 && magasin.piece>=200){ //Si le joueur achete le monde 3, la variable achatmonde3 devient true et on modifie les .txt pour garder cette variable true même si il quitte le jeu.
             menu.achatmonde3=true;
             magasin.piece -= 200;
             menu.changemonde1();
@@ -133,18 +148,17 @@ public class CatsMightFly extends JFrame implements ActionListener {
         }
     }
 
-    public void afficherMagasin(){   // On change le JPanel principal par celui du Magasin
+/// AFFICHAGE DES DIFFERENTES FENETRES
+    public void afficherMagasin(){  // On change le JPanel principal par celui du Magasin
         this.setContentPane(magasin);
         this.revalidate();
     }
-    public void afficherMenu(){  // // On change le JPanel principal par celui du Menu
+    public void afficherMenu(){  // On change le JPanel principal par celui du Menu
         this.setContentPane(menu);
         this.revalidate();
     }
-
-    public void afficherRegles(){  // // On change le JPanel principal par celui des Regles
+    public void afficherRegles(){  // On change le JPanel principal par celui des Regles
         this.setContentPane(regles);
         this.revalidate();
     }
 }
-

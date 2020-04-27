@@ -1,3 +1,7 @@
+/*
+ * Classe abstraite mère des mondes
+ * */
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
@@ -6,29 +10,30 @@ public abstract class Monde {
 
     protected final Dimension dim;
     protected Obstacle[] obstacles;
-    protected double gravite;
     protected Chat chat;
+    protected double gravite;
     protected int vitesseDefilement;
     protected int piece;
     protected Icon photochat;
-    protected Icon photodiffilant;
     protected Icon photo;
+    protected Icon photodefilant;
 
     public Monde() {
+        dim = Toolkit.getDefaultToolkit().getScreenSize();
         gravite=9.81;
         vitesseDefilement=1;
-        dim = Toolkit.getDefaultToolkit().getScreenSize();
         try {
             calculpiece();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+    
     public abstract Icon Imageduniveau();
-    public abstract Icon Imageduniveaudiffilant();
-    public abstract  int [] tailleimage();
+    public abstract Icon Imageduniveaudefilant();
+    public abstract  int [] tailleimage();  // Tableau avec dimensions de l'image pour placer les fonds
 
-
+/// GESTION OBSTACLES ET COLLISIONS
     public void obstacleAvance(int deltaT) {
         for (int i=0; i<obstacles.length; i++) {
             obstacles[i].avanceobstacle(vitesseDefilement,deltaT,i,obstacles.length);
@@ -42,21 +47,20 @@ public abstract class Monde {
                         piece +=1;
                         int hasard = (int)(2+ Math.random()*3);
                         obstacle.placementaufond(hasard);
-                    }else{ // Le joueur a touché autre chose qu'une souris
+                    } else { // Le joueur a touché autre chose qu'une souris
                         perdu = true;
                     }
                 }
-
         }
         return perdu;
     }
-
-
-    public void eloignerlesobstacles(){
+    public void eloignerlesobstacles(){ // Visuellement pour ne plus voir l'objet touché (explosé)
         for (int i=0; i<obstacles.length; i++) {
             obstacles[i].placement(i);
         }
     }
+    
+/// BUFFER READER ET WRITER DES PIECES
     public void calculpiece() throws IOException {
         BufferedReader in = new BufferedReader(new FileReader("piece.txt"));
         String texte;
@@ -66,8 +70,7 @@ public abstract class Monde {
         }
         in.close();
     }
-
-    public void updatepiece() throws IOException{ // Pour écrire dans le .txt le nouveau nombre de piece
+    public void updatepiece() throws IOException{
         BufferedWriter out = new BufferedWriter (new FileWriter("piece.txt"));
         out.write(String.valueOf(piece));
         out.close();

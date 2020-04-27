@@ -1,5 +1,8 @@
-import javax.swing.*;
+/*
+ * Classe abstraite mère des obstacles et souris
+ * */
 
+import javax.swing.*;
 
 public abstract class Obstacle extends JLabel{
 
@@ -11,7 +14,7 @@ public abstract class Obstacle extends JLabel{
     public final int largeur_fenetre;
     public final Chat chat;
 
-    public Obstacle (int larg, int haut, String type, int largeur_fenetre, int hauteur_fenetre, Chat chat) {
+    public Obstacle (int larg, int haut, int largeur_fenetre, int hauteur_fenetre, Chat chat) {
         largeur = larg;
         hauteur = haut;
         this.chat = chat;
@@ -20,29 +23,17 @@ public abstract class Obstacle extends JLabel{
         this.setBounds(coordX,coordY,larg,haut);
     }
 
-    public int get_coordX() { return coordX; }
-    public int get_largeur() { return largeur; }
-    public void set_coordX(int valeur){
-        coordX=valeur;
-    }
 
-    /// Attributs à adapter au reste du code
-
-
-    /// Placement aléatoire des obstacles (extremité droite de l'écran)
-
-    public void placement(int numeroobstacle) {
+    public abstract boolean collision(); // Méthodes abstraites à redéfinir car chaque obstacle a sa hitbox et vitesse déplacement
+    public abstract void avanceobstacle(int vitesseDefilement, int deltaT,int valeur,int valeurmax);
+    
+    public void placement(int numeroobstacle) {  // Placement aléatoire des obstacles (extremité droite de l'écran)
         coordX=(1+numeroobstacle)*largeur_fenetre+largeur;
         coordY=(int)(Math.random()*(hauteur_fenetre-this.hauteur));
         this.setLocation(coordX,coordY);
-    } // Faisabilité du parcours ?
+    }
 
-    /// Parcourir le tableau d'obstacles à tout instant pr chercher collision
-
-    public abstract boolean collision();
-    public abstract void avanceobstacle(int vitesseDefilement, int deltaT,int valeur,int valeurmax);
-
-    public void placementaufond(int valeurmax) {
+    public void placementaufond(int valeurmax) {  // Replacement des obstacles à droite une fois sortis de l'écran
         coordX=valeurmax*largeur_fenetre+largeur;
         coordY=(int)(Math.random()*(hauteur_fenetre-this.hauteur));
         this.setLocation(coordX,coordY);
