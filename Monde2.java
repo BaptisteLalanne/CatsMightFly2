@@ -16,7 +16,7 @@ public class Monde2 extends Monde {
         vitesseDefilement = 2;
         gravite = 13;
         photo = new ImageIcon(new ImageIcon("Fondmonde2.png").getImage().getScaledInstance(3055,dim.height,Image.SCALE_DEFAULT));
-        photodefilant= new ImageIcon(new ImageIcon("Fondmonde2defilant.png").getImage().getScaledInstance(3055,dim.height,Image.SCALE_DEFAULT));
+        photodefilant= new ImageIcon(new ImageIcon("Fondmonde2deffilant.png").getImage().getScaledInstance(3055,dim.height,Image.SCALE_DEFAULT));
         photochat = new ImageIcon("original2.gif");
         chat = new Chat(photochat,dim.height,350,gravite);
         obstacles = new Obstacle[4];
