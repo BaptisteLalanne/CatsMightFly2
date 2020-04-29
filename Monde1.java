@@ -10,7 +10,7 @@ public class Monde1 extends Monde {
     public Monde1() {
         super();
         photo = new ImageIcon(new ImageIcon("Fondmonde1.png").getImage().getScaledInstance(2158,dim.height, Image.SCALE_DEFAULT));
-        photodefilant= new ImageIcon(new ImageIcon("Fondmonde1defilant.png").getImage().getScaledInstance(2158,dim.height,Image.SCALE_DEFAULT));
+        photodefilant= new ImageIcon(new ImageIcon("Fondmonde1deffilant.png").getImage().getScaledInstance(2158,dim.height,Image.SCALE_DEFAULT));
         photochat = new ImageIcon("original.gif");
         chat = new Chat(photochat,dim.height,400,gravite);
         obstacles = new Obstacle[4];
