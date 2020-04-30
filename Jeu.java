@@ -10,7 +10,7 @@ import java.io.File;
 import java.io.IOException;
 
 
-public class Jeu extends JPanel implements ActionListener, KeyListener {
+public class Jeu extends JPanel implements ActionListener, KeyListener,MouseListener {
     public final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
     public Timer temps;
     public JLabel fond; // Arrière plan du niveau, 1e image
@@ -152,7 +152,23 @@ public class Jeu extends JPanel implements ActionListener, KeyListener {
             }
         }
     }
-
+/// GESTION SOURIS
+    public void mousePressed(MouseEvent e) {
+    }
+    public void mouseReleased(MouseEvent e) {
+        if(!perdu){
+            monde.chat.deplace(3);
+        }
+    }
+    public void mouseEntered(MouseEvent e) {
+    }
+    public void mouseExited(MouseEvent e) {
+    }
+    public void mouseClicked(MouseEvent e) {
+        if(!perdu){
+            monde.chat.deplace(3);
+        }
+    }
 /// FIN DE PARTIE
     public void afficherfin(){
         distance.setBounds(dim.width/2-200,50,2000,100);

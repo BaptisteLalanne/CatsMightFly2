@@ -31,8 +31,10 @@ public class Chat extends JLabel {
         }else{
             if(choix == 1){  // Choix 1 = appui court sur la barre d'espace
                 vitesse -= 2;
-            }else{  // Choix 2 = appui prolongé
+            }else if (choix ==2){  // Choix 2 = appui prolongé
                 vitesse -= 1;
+            }else{
+                vitesse -= 3; // Souris
             }
         }
         if (vitesse > 4){  // Vitesse max

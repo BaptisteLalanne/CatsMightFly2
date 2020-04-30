@@ -64,6 +64,7 @@ public class CatsMightFly extends JFrame implements ActionListener {
             }
             jeu = new Jeu(choixmonde,audio); // Créé la fenêtre de jeu
             jeu.addKeyListener(jeu);
+            jeu.addMouseListener(jeu);
             jeu.menu.addActionListener(this);
             jeu.setFocusable(true);
             this.setContentPane(jeu);
