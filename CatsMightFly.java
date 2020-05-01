@@ -115,9 +115,9 @@ public class CatsMightFly extends JFrame implements ActionListener {
         }
         
 /// ACHAT DES MONDES
-        if(e.getSource()==magasin.achat2 && magasin.piece>=100 ){ //Si le joueur achète le monde 2, la variable achatmonde2 devient true et on modifie les .txt pour garder cette variable true même si il quitte le jeu.
-            menu.achatmonde2=true;
-            magasin.piece -= 100;
+        if(e.getSource()==magasin.achat2 && magasin.getPiece()>=100 ){ //Si le joueur achète le monde 2, la variable achatmonde2 devient true et on modifie les .txt pour garder cette variable true même si il quitte le jeu.
+            menu.setAchatmonde2(true);
+            magasin.setPiece(magasin.getPiece()-100);
             try {
                 magasin.updatepiece();
                 magasin.calculpiece();
@@ -128,9 +128,9 @@ public class CatsMightFly extends JFrame implements ActionListener {
             menu.changemonde1();
             monde=1;
         }
-        if(e.getSource()==magasin.achat3 && magasin.piece>=200){ //Si le joueur achete le monde 3, la variable achatmonde3 devient true et on modifie les .txt pour garder cette variable true même si il quitte le jeu.
-            menu.achatmonde3=true;
-            magasin.piece -= 200;
+        if(e.getSource()==magasin.achat3 && magasin.getPiece()>=200){ //Si le joueur achete le monde 3, la variable achatmonde3 devient true et on modifie les .txt pour garder cette variable true même si il quitte le jeu.
+            menu.setAchatmonde3(true);
+            magasin.setPiece(magasin.getPiece()-200);
             menu.changemonde1();
             monde=1;
             try {
@@ -141,10 +141,10 @@ public class CatsMightFly extends JFrame implements ActionListener {
                 ex.printStackTrace();
             }
         }
-        if(menu.achatmonde3){ // Si le joueur a déjà acheté dans des parties précédentes le monde 3 ou 2, il faut qu'il ne puisse plus l'acheter
+        if(menu.getAchatmonde3()){ // Si le joueur a déjà acheté dans des parties précédentes le monde 3 ou 2, il faut qu'il ne puisse plus l'acheter
             magasin.achat3.setEnabled(false);
         }
-        if(menu.achatmonde2){
+        if(menu.getAchatmonde2()){
             magasin.achat2.setEnabled(false);
         }
     }

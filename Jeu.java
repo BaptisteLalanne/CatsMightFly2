@@ -11,20 +11,22 @@ import java.io.IOException;
 
 
 public class Jeu extends JPanel implements ActionListener, KeyListener,MouseListener {
-    public final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-    public Timer temps;
-    public JLabel fond; // Arrière plan du niveau, 1e image
-    public JLabel fond2; // Arrière plan du niveau, 2e image
-    public JLabel fond3; // Premier plan du niveau, 1e image
-    public JLabel fond4; // Premier plan du niveau, 2e image
-    public JLabel distance; // Affichage de la distance parcourue
-    public int tempspasse;  // Variables pour gérer position des fonds (selon temps écoulé & vitesse de défilement)
-    public int tempspassedeuxiemefond;
-    public int avance = 1;  // Facteur pour augmenter progressivement la vitesse de défilement
-    public int cinqseconde;  // Vitesse de défilement augmente toutes les 5 secondes
-    public int distanceparcourue;  // Distance parcourue depuis dernier changement de vitesse
-    public int distanceparcourueparvitesse;  // Distance additionnée des précédentes vitesses (total sauf vitesse courante)
-    public boolean perdu;
+    private final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+    private Timer temps;
+    private JLabel nombrepiece; // Quand le joueur perd on montre son nombre total de pièce
+    private JLabel piece; // Quand le joueur perd (icone des pieces)
+    private JLabel fond; // Arrière plan du niveau, 1e image
+    private JLabel fond2; // Arrière plan du niveau, 2e image
+    private JLabel fond3; // Premier plan du niveau, 1e image
+    private JLabel fond4; // Premier plan du niveau, 2e image
+    private JLabel distance; // Affichage de la distance parcourue
+    private int tempspasse;  // Variables pour gérer position des fonds (selon temps écoulé & vitesse de défilement)
+    private int tempspassedeuxiemefond;
+    private int avance = 1;  // Facteur pour augmenter progressivement la vitesse de défilement
+    private int cinqseconde;  // Vitesse de défilement augmente toutes les 5 secondes
+    private int distanceparcourue;  // Distance parcourue depuis dernier changement de vitesse
+    private int distanceparcourueparvitesse;  // Distance additionnée des précédentes vitesses (total sauf vitesse courante)
+    private boolean perdu;
     public Bouton menu;
     private Monde monde;
     private Audio audio;
@@ -35,15 +37,18 @@ public class Jeu extends JPanel implements ActionListener, KeyListener,MouseList
         this.setLayout(null);
         temps = new Timer(10,this);
         temps.start();
-        
         menu = new Bouton (new ImageIcon("retour.png"));
         menu.setBounds(0, 0, 300, 200);
         distance = new JLabel();
+        nombrepiece = new JLabel();
+        piece = new JLabel(new ImageIcon("souris.png"));
         policetexte(true);
         distance.setForeground(Color.white);
+        nombrepiece.setForeground(Color.white);
         distance.setText("Distance parcourue:");
         distance.setBounds(100,dim.height-200,2000,100);
-        
+        piece.setBounds(dim.width/2+520,230,75,60);
+        nombrepiece.setBounds(dim.width/2-200,200,2000,100);
         fond = new JLabel();
         fond2 = new JLabel();
         fond3= new JLabel();
@@ -67,9 +72,12 @@ public class Jeu extends JPanel implements ActionListener, KeyListener,MouseList
             this.add(((Monde2) monde).thermo);
         }
         this.add(menu);
+        piece.setVisible(false);
         menu.setVisible(false); // On désactive le bouton retour, il sera visible et utilisable quand le joueur perd
         menu.setEnabled(false);
         this.add(monde.chat);
+        this.add(piece);
+        this.add(nombrepiece);
         this.add(distance);
         this.add(fond3);
         this.add(fond4);
@@ -176,6 +184,8 @@ public class Jeu extends JPanel implements ActionListener, KeyListener,MouseList
         audio.arretermonde2();
         audio.arretermonde3();
         policetexte(false); // false = grande police
+        nombrepiece.setText("Nombre de souris:   "+monde.piece);
+        piece.setVisible(true);
         menu.setVisible(true);  // On dévoile/active le bouton retour (instancié dans le constructeur au début)
         menu.setEnabled(true);
     }
@@ -194,5 +204,6 @@ public class Jeu extends JPanel implements ActionListener, KeyListener,MouseList
             new Font("Arial",Font.BOLD,12);
         }
         distance.setFont(font);
+        nombrepiece.setFont(font);
     }
 }

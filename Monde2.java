@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Monde2 extends Monde {
-    public int temp;
+    private int temp;
     public final JProgressBar thermo;
     public final JLabel decorationthermo;
 

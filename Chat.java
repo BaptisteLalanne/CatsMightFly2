@@ -11,7 +11,6 @@ public class Chat extends JLabel {
     private final int ybasduniveau;
     private final double gravite;
     private double vitesse;
-    public int piece;
 
     public Chat (Icon photochat, int hauteur, int ybasduniveau, double gravite){
         this.ybasduniveau = ybasduniveau;
@@ -23,7 +22,6 @@ public class Chat extends JLabel {
     }
     
     public double get_vitesse() { return vitesse; }
-    
 
     public void deplace(int choix) {
         if(coordy <= 0){

@@ -13,11 +13,11 @@ public class Menu extends JPanel {
     public final Bouton droite;
     public final Bouton gauche;
     public final Bouton regles;
-    public final JLabel image;
-    public final JLabel verrouiller;
-    public final Dimension dim;
-    public boolean achatmonde2; // Variables boolean renvoie true si le monde a déjà été acheté
-    public boolean achatmonde3;
+    private final JLabel image;
+    private final JLabel verrouiller;
+    private final Dimension dim;
+    private boolean achatmonde2; // Variables boolean renvoie true si le monde a déjà été acheté
+    private boolean achatmonde3;
     private final JLabel choixniveau;
     private Icon gif;
     private Icon photo;
@@ -66,6 +66,19 @@ public class Menu extends JPanel {
         this.add(choixniveau);
         this.add(verrouiller);
         this.add(image);
+    }
+//// GETTER ET SETTER POUR LES VARIABLES D'ACHATS DES MONDES
+    public boolean getAchatmonde2(){
+        return achatmonde2;
+    }
+    public boolean getAchatmonde3(){
+        return achatmonde3;
+    }
+    public void setAchatmonde2(boolean achatmonde2){
+        this.achatmonde2= achatmonde2;
+    }
+    public void setAchatmonde3(boolean achatmonde3){
+        this.achatmonde3= achatmonde3;
     }
 
 /// AFFICHAGE DU MONDE SELECTIONNE SUR MENU ACCUEIL

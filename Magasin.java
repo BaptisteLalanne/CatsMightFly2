@@ -8,13 +8,13 @@ import java.io.*;
 
 public class Magasin extends JPanel {
 
-    public final Dimension dim;
+    private final Dimension dim;
     public final Bouton retour;
     public final JButton achat2;
     public final JButton achat3;
-    public final JLabel nombrepiece;
-    public int piece;
-    public String texte;
+    private final JLabel nombrepiece;
+    private int piece;
+    private String texte;
 
     public Magasin(){
         this.setLayout(null);
@@ -51,6 +51,13 @@ public class Magasin extends JPanel {
         this.add(fond);
     }
 
+/// GETTER SETTER PIECE
+    public int getPiece(){
+        return this.piece;
+    }
+    public void setPiece(int piece){
+        this.piece=piece;
+    }
 
     public void recuperervaleurpiece (String t){
         nombrepiece.setText(t);
