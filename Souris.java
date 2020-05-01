@@ -10,6 +10,7 @@ public class Souris extends Obstacle {
         super(larg,haut,largeur_fenetre,hauteur_fenetre,chat);
         Icon icon = new ImageIcon("souris.png");
         this.setIcon(icon);
+        vitesseinitialobstacle = 4;
     }
 
 	public boolean collision (){

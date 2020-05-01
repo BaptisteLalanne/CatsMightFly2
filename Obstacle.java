@@ -10,9 +10,10 @@ public abstract class Obstacle extends JLabel{
     protected final int hauteur;
     protected int coordX;
     protected int coordY;
-    public final int hauteur_fenetre;
-    public final int largeur_fenetre;
+    protected final int hauteur_fenetre;
+    protected final int largeur_fenetre;
     public final Chat chat;
+    protected int vitesseinitialobstacle;
 
     public Obstacle (int larg, int haut, int largeur_fenetre, int hauteur_fenetre, Chat chat) {
         largeur = larg;
@@ -25,7 +26,13 @@ public abstract class Obstacle extends JLabel{
 
 
     public abstract boolean collision(); // Méthodes abstraites à redéfinir car chaque obstacle a sa hitbox et vitesse déplacement
-    public abstract void avanceobstacle(int vitesseDefilement, int deltaT,int valeur,int valeurmax);
+    public void avanceobstacle(int vitesseDefilement, int deltaT,int valeur,int valeurmax){
+        if (coordX + largeur - vitesseDefilement*(vitesseinitialobstacle+deltaT) < 0) { // Si l'obstacle sort de l'écran
+            this.placementaufond(valeurmax - 1); // Pour qu'il n'y ait pas d'espace entre missiles, on enlève la place prise par la souris
+        } else
+            coordX =coordX- vitesseDefilement * (vitesseinitialobstacle+deltaT); // deltaT le délai entre chaque appel à la méthode
+        this.setLocation(coordX,coordY);
+    }
     
     public void placement(int numeroobstacle) {  // Placement aléatoire des obstacles (extremité droite de l'écran)
         coordX=(1+numeroobstacle)*largeur_fenetre+largeur;

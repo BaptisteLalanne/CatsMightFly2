@@ -17,6 +17,7 @@ public abstract class Monde {
     protected Icon photochat;
     protected Icon photo;
     protected Icon photodefilant;
+    protected int largeurimage;
 
     public Monde() {
         dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -28,10 +29,14 @@ public abstract class Monde {
             e.printStackTrace();
         }
     }
-    
-    public abstract Icon Imageduniveau();
-    public abstract Icon Imageduniveaudefilant();
-    public abstract  int [] tailleimage();  // Tableau avec dimensions de l'image pour placer les fonds
+
+    public Icon Imageduniveau() { return photo; }
+    public Icon Imageduniveaudefilant() { return photodefilant; }
+    public int [] tailleimage() { // Tableau avec dimensions de l'image pour placer les fonds
+        int[] tableau;
+        tableau = new int[]{dim.width,0 ,largeurimage,dim.height};
+        return tableau;
+    }
 
 /// GESTION OBSTACLES ET COLLISIONS
     public void obstacleAvance(int deltaT) {

@@ -12,6 +12,7 @@ public class TeteChercheuse extends Obstacle {
         super(larg,haut,largeur_fenetre,hauteur_fenetre,chat);
         Icon icon = new ImageIcon("requin2.png");
         this.setIcon(icon);
+        vitesseinitialobstacle = 5;
     }
 
     public boolean collision (){
@@ -36,16 +37,12 @@ public class TeteChercheuse extends Obstacle {
     
 /// REDEFINITION METHODES AVEC CALCUL TRAJECTOIRE
     public void placement(int numeroobstacle) {
-        coordX = (1 + numeroobstacle) * largeur_fenetre + largeur;
-        coordY = (int) (Math.random() * (hauteur_fenetre - this.hauteur));
-        this.setLocation(coordX, coordY);
+        super.placement(numeroobstacle);
         calcultrajectoire(); // Dès que le missile est à droite de l'écran, en fonction de son placement aléatoire et de celui du joueur, il calcule la trajectoire qu'il va suivre
     }
 
 	public void placementaufond(int valeurmax) {
-        coordX=valeurmax*largeur_fenetre+largeur;
-        coordY=(int)(Math.random()*(hauteur_fenetre-this.hauteur));
-        this.setLocation(coordX,coordY);
+        super.placementaufond(valeurmax);
         calcultrajectoire();
     }
 

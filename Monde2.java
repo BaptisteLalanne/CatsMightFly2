@@ -38,36 +38,19 @@ public class Monde2 extends Monde {
         Icon deco = new ImageIcon("thermo.png");
         decorationthermo.setIcon(deco);
         decorationthermo.setBounds(dim.width-110,0,68,250);
+        largeurimage =3055;
     }
-    
-    public Icon Imageduniveau() { return photo; }
 
-    public Icon Imageduniveaudefilant() { return photodefilant; }
 
-    public int [] tailleimage() {
-        int[] tableau;
-        tableau = new int[]{dim.width,0 ,3055,dim.height};
-        return tableau;
-    }
+
 
 /// REDEFINITION METHODE AVEC PRISE EN COMPTE TEMPERATURE
     public boolean collisionobstacles() {
+        boolean perdu = super.collisionobstacles();
         deplacementjauge();
-        boolean perdu = false;
         temp = temperature();
         if (temp>1000){
             perdu = true;
-        }
-        for (Obstacle obstacle : obstacles) {
-            if (obstacle.collision()) {
-                if (obstacle instanceof Souris) {
-                    piece +=1;
-                    int hasard = (int)(2+ Math.random()*3);
-                    obstacle.placementaufond(hasard);
-                }else{
-                    perdu = true;
-                }
-            }
         }
         return perdu;
     }

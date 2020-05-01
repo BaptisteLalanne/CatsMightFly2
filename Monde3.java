@@ -18,15 +18,6 @@ public class Monde3 extends Monde {
         obstacles[0].placement(0);
         obstacles[1] = new Souris(75,60,dim.width,dim.height-80,chat);
         obstacles[1].placement(1);
-    }
-
-    public Icon Imageduniveau() { return photo; }
-    
-    public Icon Imageduniveaudefilant() { return photodefilant; }
-
-    public int[] tailleimage() {
-        int[] tableau;
-        tableau = new int[]{dim.width, 0, 2000, dim.height};
-        return tableau;
+        largeurimage =2000;
     }
 }

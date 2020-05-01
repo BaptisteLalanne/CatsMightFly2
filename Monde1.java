@@ -20,15 +20,6 @@ public class Monde1 extends Monde {
         }
         obstacles[3] = new Souris(75,60,dim.width,dim.height-80,chat);
         obstacles[3].placement(3);
-    }
-
-    public Icon Imageduniveau() { return photo; }
-
-    public Icon Imageduniveaudefilant() { return photodefilant; }
-
-    public int[] tailleimage() {
-        int[] tableau;
-        tableau = new int[]{dim.width,0 ,2158,dim.height};
-        return tableau;
+        largeurimage =2158;
     }
 }
